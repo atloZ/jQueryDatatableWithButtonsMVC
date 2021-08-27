@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Datatable";
+}
+
+<br />
+<div class="container row p-0 m-0">
+    <div class="col-6">
+        <h2 class="text-info">Address List</h2>
+    </div>
+    <div class="col-3 offset-3">
+        <a asp-action="Upsert" asp-controller="Addresses" class="btn btn-info form-control text-white">
+            Add New Address
+        </a>
+    </div>
+    <div class="col-12 border p-3">
+        <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>AddressLine1</th>
+                    <th>AddressLine2</th>
+                    <th>City</th>
+                    <th>StateProvinceID</th>
+                    <th>PostalCode</th>
+                    <th>Rowguid</th>
+                    <th>ModifiedDate</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/addressList.js"></script>
+}
