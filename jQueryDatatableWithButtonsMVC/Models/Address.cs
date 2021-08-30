@@ -4,6 +4,10 @@
 
 namespace DataTable.Models
 {
+    /// <summary>
+    /// Entity framework által generált kód.
+    /// </summary>
+
     public partial class Address
     {
         public int AddressId { get; set; }

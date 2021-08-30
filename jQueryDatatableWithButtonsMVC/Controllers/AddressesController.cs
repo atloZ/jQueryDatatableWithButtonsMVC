@@ -19,6 +19,8 @@ namespace DataTable.Controllers
             _db = db;
         }
 
+        #region cshtml hozzá meghívás
+
         public IActionResult Index()
         {
             return View();
@@ -67,18 +69,36 @@ namespace DataTable.Controllers
             return View(Address);
         }
 
+        #endregion cshtml hozzá meghívás
+
+        #region Adatbázis json ként vissza adása
+
+        /// <summary>
+        /// Csak az aktív adatsorok kiolvasása
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetAllActive()
         {
             return Json(new { data = await _db.Addresses.Where(f => f.Active == 0).ToListAsync() });
         }
 
+        /// <summary>
+        /// Teljes adathalmaz kiolvasása
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             return Json(new { data = await _db.Addresses.ToListAsync() });
         }
 
+        #endregion Adatbázis json ként vissza adása
+
+        #region Adattörlés
+
+        /// <summary>
+        /// Teljes törlés helye. Adatbázis kulcsok miatt nem engedi törölni az adatsorokat.
+        /// Hogy a CascadeDelete megvalositható legyen modellezni kellene a többi táblát is amivel kapcsolatban van.
+        /// </summary>
         [HttpDelete]
         public IActionResult CascadeDelete(int id)
         {
@@ -101,6 +121,9 @@ namespace DataTable.Controllers
             }
         }
 
+        /// <summary>
+        /// Inaktivvá teszi az adott rekordot.
+        /// </summary>
         [HttpDelete]
         public IActionResult Delete(int id)
         {
@@ -120,5 +143,7 @@ namespace DataTable.Controllers
                 return Json(new { success = false, message = "Error while Deleting" });
             }
         }
+
+        #endregion Adattörlés
     }
 }
